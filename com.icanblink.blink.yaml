@@ -11,7 +11,8 @@ cleanup-commands:
 command: blink
 finish-args:
   - --device=all
-  - --filesystem=home
+  - --filesystem=xdg-download
+  - --filesystem=~/.blink:create
   - --share=ipc
   - --share=network
   - --socket=pulseaudio
