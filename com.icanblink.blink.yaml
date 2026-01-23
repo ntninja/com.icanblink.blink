@@ -88,8 +88,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-application
-        tag: release-3.0.9
-        commit: d13e68fa63f3dcb1d22597898481084e80e4efb8
+        #tag: release-3.0.10 ← missing
+        commit: c9b8894f9f8cd1c7b5ea2b2ea742c991070c3870
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -99,9 +99,7 @@ modules:
       - type: git
         url: https://github.com/AGProjects/python3-eventlib
         #tag: 0.3.0-dirty
-        commit: 67d20654a2335299382b01fc2d08b645bcdac9e1
-      - type: patch
-        path: patches/python3-eventlib/01-green-socket-context-manager.patch
+        commit: cb5a2f1bca5fdcd4a01f56c739cb7719f159cf7f
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -110,10 +108,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-gnutls
-        #tag: release-3.1.11  # ← missing
-        commit: d0fa84b781ccd2a7e500e4fc8cb7a97d9724ec7d
-      - type: patch
-        path: patches/python3-gnutls/01-optional-deps-and-setuptools.patch
+        #tag: release-3.1.12  # ← missing
+        commit: ea7298dcc53a24e8c766d3fe2d90b8b767f0b7e4
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
