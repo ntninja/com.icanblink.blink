@@ -1,0 +1,24 @@
+commit b1a034bd3e26f5b09d544e1171ad8b1f58dcc651
+Author: Erin of Yukis <erin-dev@ninetailed.ninja>
+Date:   Thu Jan 22 23:42:17 2026 +0100
+
+    Fix “Server … answered 'GreenSocket' object does not support the context manager protocol”
+
+diff --git a/eventlib/greenio.py b/eventlib/greenio.py
+index fa1889c..2c031e7 100644
+--- a/eventlib/greenio.py
++++ b/eventlib/greenio.py
+@@ -389,6 +389,13 @@ class GreenSocket(object):
+     def gettimeout(self):
+         return self.timeout
+ 
++    def __enter__(self):
++        return self
++
++    def __exit__(self, *exc):
++        self.close()
++        return False
++
+ def read(self, size=None):
+     if size is not None and not isinstance(size, int):
+         raise TypeError('Expecting an int or long for size, got %s: %s' % (type(size), repr(size)))

@@ -1,0 +1,153 @@
+commit 261687dd082c7eeeccd476e63709f54ea1013940
+Author: Erin of Yukis <erin-dev@ninetailed.ninja>
+Date:   Thu Jan 22 14:05:56 2026 +0100
+
+    Switch to setuptools and PEP 621 from distutils
+    
+    Do not depend on testing requirements (PyOpenSSL) for standard builds, move
+    them to an optional dependency instead.
+    
+    Drop unused `service_identity` dependency.
+    
+    Drop unused `twisted.internet.ssl` import pulling in PyOpenSSL.
+
+diff --git a/debian/control b/debian/control
+index da6a980..8ac05f8 100644
+--- a/debian/control
++++ b/debian/control
+@@ -5,7 +5,9 @@ Maintainer: Adrian Georgescu <ag@ag-projects.com>
+ Uploaders: Tijmen de Mes <tijmen@ag-projects.com>
+ Build-Depends: debhelper (>= 11),
+                dh-python,
+-               python3 (>= 3.6.5)
++               python3 (>= 3.6.5),
++               python3-setuptools (>= 66.1.0),
++               pybuild-plugin-pyproject
+ Standards-Version: 4.5.0
+ 
+ Package: python3-gnutls
+diff --git a/gnutls/connection.py b/gnutls/connection.py
+index b44c932..758baf4 100644
+--- a/gnutls/connection.py
++++ b/gnutls/connection.py
+@@ -13,7 +13,6 @@ __all__ = [
+ 
+ from time import time
+ 
+-from twisted.internet import ssl
+ from gnutls.library.constants import GNUTLS_SHUT_RDWR as SOCKET_SHUT_RDWR
+ from gnutls.constants import CRED_CERTIFICATE
+ 
+diff --git a/pyproject.toml b/pyproject.toml
+new file mode 100644
+index 0000000..b313492
+--- /dev/null
++++ b/pyproject.toml
+@@ -0,0 +1,38 @@
++[build-system]
++requires = [
++  "setuptools >= 66.1.0",
++]
++build-backend = "setuptools.build_meta"
++
++[project]
++name = "python3-gnutls"
++description = "Python wrapper for the GnuTLS library"
++license = "LGPL-2.1-or-later"
++readme = { file = "README", content-type = "text/plain" }
++urls = { source = "https://github.com/AGProjects/python3-gnutls" }
++
++authors = [
++	{ name = "Dan Pascu", email = "support@ag-projects.com" }
++]
++
++classifiers = [
++	"Development Status :: 5 - Production/Stable",
++	"Intended Audience :: Developers",
++	"Operating System :: OS Independent",
++	"Programming Language :: Python",
++	"Topic :: Software Development :: Libraries :: Python Modules"
++]
++
++dynamic = ["version", "dependencies", "optional-dependencies"]
++
++[tool.setuptools]
++platforms = ["Platform Independent"]
++
++[tool.setuptools.dynamic]
++version = { attr = "gnutls.__version__" }
++
++# Cannot use attr for description: https://github.com/pypa/setuptools/issues/5053
++#description = { attr = "gnutls.__summary__" }
++
++dependencies = { file = "requirements.txt" }
++optional-dependencies = { tests = { file = "requirements-tests.txt" } }
+\ No newline at end of file
+diff --git a/requirements-tests.txt b/requirements-tests.txt
+new file mode 100644
+index 0000000..4a0c2ef
+--- /dev/null
++++ b/requirements-tests.txt
+@@ -0,0 +1 @@
++pyOpenSSL >= 19.1.0
+diff --git a/requirements.txt b/requirements.txt
+index a6159e9..820d5b6 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,3 +1 @@
+ twisted >= 20.3.0
+-pyOpenSSL >= 19.1.0
+-service_identity >= 18.1.0
+diff --git a/setup.py b/setup.py
+deleted file mode 100755
+index 118e367..0000000
+--- a/setup.py
++++ /dev/null
+@@ -1,47 +0,0 @@
+-#!/usr/bin/python3
+-
+-import os
+-
+-from distutils.core import setup
+-from gnutls import __info__ as package_info
+-
+-
+-def find_packages(toplevel):
+-    return [
+-        directory.replace(os.path.sep, '.') for directory, subdirs, files in os.walk(toplevel) if '__init__.py' in files
+-    ]
+-
+-
+-def requirements():
+-    install_requires = []
+-    with open('requirements.txt') as f:
+-        for line in f:
+-            install_requires.append(line.strip())
+-    return install_requires
+-
+-
+-setup(
+-    name=package_info.__project__,
+-    version=package_info.__version__,
+-
+-    description=package_info.__summary__,
+-    long_description=open('README').read(),
+-    license=package_info.__license__,
+-    url=package_info.__webpage__,
+-
+-    author=package_info.__author__,
+-    author_email=package_info.__email__,
+-
+-    platforms=["Platform Independent"],
+-    install_requires=requirements(),
+-    classifiers=[
+-        "Development Status :: 5 - Production/Stable",
+-        "Intended Audience :: Developers",
+-        "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
+-        "Operating System :: OS Independent",
+-        "Programming Language :: Python",
+-        "Topic :: Software Development :: Libraries :: Python Modules"
+-    ],
+-
+-    packages=find_packages('gnutls')
+-)
