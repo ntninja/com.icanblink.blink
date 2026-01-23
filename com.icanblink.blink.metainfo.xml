@@ -66,15 +66,20 @@
   </screenshots>
 
   <url type="homepage">https://icanblink.com/</url>
-  <url type="bugtracker">https://icanblink.com/help/</url>
+  <url type="bugtracker">https://lists.ag-projects.com/mailman/listinfo/blink</url>
   <url type="help">https://icanblink.com/help/</url>
+  <url type="contribute">https://github.com/AGProjects/blink-qt/</url>
+  <url type="vcs-browser">https://github.com/AGPRojects/blink-qt/</url>
 
   <provides>
     <binary>blink</binary>
   </provides>
 
   <releases>
-    <release version="6.0.4" />
+    <release version="6.0.4-dev" date="2026-01-22" />
+    <release version="6.0.4" date="2025-03-07">
+      <!-- Missing changelog entry -->
+    </release>
     <release version="6.0.3" date="2025-02-26">
       <description>
         <ul>
