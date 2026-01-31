@@ -105,8 +105,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-application
-        #tag: release-3.0.10 ← missing
-        commit: c9b8894f9f8cd1c7b5ea2b2ea742c991070c3870
+        tag: release-3.0.10
+        commit: 4c7fa833b2cb14c300b4835870df84d91be1b5a5
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -115,8 +115,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-eventlib
-        #tag: 0.3.0-dirty
-        commit: cb5a2f1bca5fdcd4a01f56c739cb7719f159cf7f
+        tag: 0.3.1
+        commit: 3382d14a763719d39907f2f8140cf4eeb8c8d00a
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -125,8 +125,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-gnutls
-        #tag: release-3.1.12  # ← missing
-        commit: ea7298dcc53a24e8c766d3fe2d90b8b767f0b7e4
+        tag: release-3.1.12
+        commit: 757ebc3f01c12a55adbbeef9a2122da1f7b081f0
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -155,8 +155,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-xcaplib
-        #tag: 2.0.1-dirty
-        commit: 925846f2520d823f0b83279ceca6202808a4ca4f
+        tag: 2.0.2
+        commit: 2bdce48bcec6c80618da1b04cd9a437297993e56
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
@@ -165,8 +165,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/python3-sipsimple
-        #tag: 5.3.3-2-dirty
-        commit: cdd2cb474402e83a906de8eb07ce11ddd27ee150
+        tag: 5.3.4
+        commit: 95ecda8d299d344aba23022310b7832f1e98cb75
       - type: file
         url: https://github.com/pjsip/pjproject/archive/refs/tags/2.11.1.tar.gz
         sha512: fda8e4bf9d5f34d3940c69414a20f177d09ca79c76753f6597326f8afc72f847dd70df4e1f2c34fae173f5728d5ac1419ed602651c68167c747c40280dbe117e
@@ -176,14 +176,8 @@ modules:
         url: https://github.com/wernerd/ZRTPCPP
         commit: 6b3cd8e6783642292bad0c21e3e5e5ce45ff3e03
         dest: deps/ZRTPCPP
-      - type: patch
-        paths:
-          - patches/python3-sipsimple/01-fix-zrtp-cstdint-include.patch
-          - patches/python3-sipsimple/02-fix-get-dependencies-script.patch
-          - patches/python3-sipsimple/03-fix-alsa-backend-compilation.patch
-          - patches/python3-sipsimple/04-drop-already-applied-patches.patch
     build-commands:
-      - AUTOINSTALL=0 ./get_dependencies.sh 2.11.1
+      - AUTOINSTALL=0 bash ./get_dependencies.sh 2.11.1
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
 
   # Install Blink from source
@@ -192,8 +186,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/AGProjects/blink-qt
-        #tag: 6.0.4-dirty
-        commit: d8b15038f5bd04d9b22a25397135db733573318f
+        tag: 6.0.6
+        commit: 640faebb3dbe5a58d0736f6f939286a8b9cc0090
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --prefix="${FLATPAK_DEST}" --no-build-isolation .
       # Install desktop files

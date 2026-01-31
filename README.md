@@ -106,4 +106,4 @@ manifest’s `modules` section.
 7. Open https://icanblink.com/changelog-linux/ and add the new changelog
    entries to `com.icanblink.blink.metainfo.xml` following the existing style.
 
-7. Perform test build and *run it* to test as many features as possible.
+8. Perform test build and *run it* to test as many features as possible.

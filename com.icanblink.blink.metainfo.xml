@@ -76,7 +76,26 @@
   </provides>
 
   <releases>
-    <release version="6.0.4-dev" date="2026-01-22" />
+    <release version="6.0.6" date="2026-01-28">
+      <description>
+        <ul>
+          <li>Fixed missing dependency</li>
+        </ul>
+      </description>
+    </release>
+    <release version="6.0.5" date="2026-01-27">
+      <description>
+        <ul>
+          <li>Replaced oauth2client with google auth</li>
+          <li>Fixed video colors on MacOS</li>
+          <li>Removed debug print</li>
+          <li>Fixed mouse positions in resizing and moving video</li>
+          <li>Fixed resize cursor in video</li>
+          <li>Initial port to Cython 3 with backwards compatibilty</li>
+          <li>Update mac requirements</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.4" date="2025-03-07">
       <!-- Missing changelog entry -->
     </release>
