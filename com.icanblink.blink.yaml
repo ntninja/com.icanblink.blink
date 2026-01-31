@@ -23,31 +23,48 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
 cleanup:
-  - /lib/*.a
-  - /lib/*.la
-  # Build dependencies
+  # Build dependencies (setuptools-rust)
+  - /lib/python3.??/site-packages/semantic_version*/
+  - /lib/python3.??/site-packages/setuptools_rust*/
+  - /bin/setuptools-scm
+  # Build dependencies (puccinialin)
+  - /lib/python3.??/site-packages/anyio*/
   - /lib/python3.??/site-packages/filelock*/
+  - /lib/python3.??/site-packages/h11*/
+  - /lib/python3.??/site-packages/httpcore*/
   - /lib/python3.??/site-packages/httpx*/
   - /bin/httpx
   - /lib/python3.??/site-packages/platformdirs*/
-  - /lib/python3.??/site-packages/semantic_version*/
   - /lib/python3.??/site-packages/tqdm*/
   - /bin/tqdm
-  - /lib/python3.??/site-packages/setuptools_rust*/
   - /lib/python3.??/site-packages/puccinialin*/
   - /bin/puccinialize
+  # Build dependencies (maturin)
   - /lib/python3.??/site-packages/maturin*/
+  - /bin/maturin
+
   # python3-twisted scripts
+  - /bin/automat-visualize
   - /bin/cftp
   - /bin/ckeygen
   - /bin/conch
+  - /bin/incremental
   - /bin/mailmail
   - /bin/pyhtmlizer
   - /bin/tkconch
   - /bin/trial
   - /bin/twist
   - /bin/twistd
+  # python3-google-api-python-client scripts
+  - /bin/google-oauthlib-tool
+  - /bin/pyrsa-*
+  # python3-requests scripts
+  - /bin/normalizer
+  # python3-sqlobject scripts
+  - /bin/sqlobject-*
 
+  - /lib/*.a
+  - /lib/*.la
   - /lib*/cmake
   - /lib*/debug
   - /lib*/pkgconfig
